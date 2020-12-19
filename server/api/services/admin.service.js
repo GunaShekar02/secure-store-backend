@@ -3,6 +3,7 @@ import NodeRSA from "node-rsa";
 import keccak256 from "keccak256";
 
 import userModel from "../../models/user";
+import BlockchainService from "./blockchain.service";
 
 import l from "../../common/logger";
 import { adminEmail, adminPassword, adminApiKey } from "../../common/config";
@@ -56,6 +57,12 @@ class AdminService {
 
         updatePromises.push(userModel.findByIdAndUpdate(grade.roll, update));
       });
+
+      for (let grade of grades) {
+        const hash = keccak256(JSON.stringify(grade)).toString("hex");
+        console.log(hash, grade.roll, sem - 1);
+        await BlockchainService.issue(hash, grade.roll, sem - 1);
+      }
 
       await Promise.all(updatePromises);
     } catch (err) {

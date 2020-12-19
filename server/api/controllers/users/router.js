@@ -5,4 +5,5 @@ export default express
   .Router()
   .post("/register", controller.register)
   .post("/verifyOtp", controller.verifyOtp)
-  .get("/results", controller.fetchResults);
+  .get("/results", controller.fetchResults)
+  .get("/verify", controller.verify);

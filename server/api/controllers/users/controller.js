@@ -23,10 +23,20 @@ export class Controller {
   async fetchResults(req, res, next) {
     try {
       const result = await UsersService.fetchResults(
-        req.body.roll,
-        req.body.sem
+        req.query.roll,
+        req.query.sem
       );
       res.status(200).json({ result, message: "Successful" });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async verify(req, res, next) {
+    try {
+      const { roll, sem, targetHash } = req.query;
+      const verifed = await UsersService.verify(roll, sem, targetHash);
+      res.status(200).json({ verifed, message: "Successful" });
     } catch (err) {
       next(err);
     }

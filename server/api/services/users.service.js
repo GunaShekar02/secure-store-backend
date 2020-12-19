@@ -2,6 +2,8 @@ import MailerService from "./mailer.service";
 
 import userModel from "../../models/user";
 
+import BlockchainService from "./blockchain.service";
+
 import l from "../../common/logger";
 import generateOtp from "../../utils/otpGenerator";
 
@@ -83,6 +85,19 @@ class UsersService {
     try {
       const user = await userModel.findById(roll, "grades");
       return user.grades[sem - 1];
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async verify(roll, sem, targetHash) {
+    try {
+      const verified = await BlockchainService.verify(
+        roll,
+        sem - 1,
+        targetHash
+      );
+      return verified;
     } catch (err) {
       throw err;
     }

@@ -22,7 +22,7 @@ class MailerService {
       };
       this.triggerMail(mailOptions);
     } catch (err) {
-      l.error("[SEND REPORT]", err, eventName);
+      l.error("[SEND OTP]", err, eventName);
       throw err;
     }
   }

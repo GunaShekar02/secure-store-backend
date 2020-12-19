@@ -12,6 +12,20 @@ export class Controller {
       next(err);
     }
   }
+
+  async uploadGrades(req, res, next) {
+    try {
+      if (!req.files?.[0])
+        throw { status: 400, message: "Please upload a valid file!" };
+      await AdminService.uploadGrades(
+        req.files?.[0].originalname,
+        req.body.sem
+      );
+      res.status(200).json({ message: "Successfully uploaded grades" });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new Controller();

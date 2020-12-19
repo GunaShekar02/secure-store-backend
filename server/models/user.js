@@ -13,12 +13,8 @@ const User = new mongoose.Schema({
   otpExpiry: {
     type: String,
   },
-  grades: [
-    {
-      cipherText: String,
-      hash: String,
-    },
-  ],
+  grades: [String],
+  hashes: [String],
   verified: {
     type: Boolean,
     default: false,

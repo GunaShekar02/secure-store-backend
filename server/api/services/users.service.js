@@ -13,11 +13,12 @@ class UsersService {
   async register(roll) {
     try {
       const user = await userModel.findById(roll);
-      if (user?.verified) throw { message: "User already registered!" };
+      if (user?.verified)
+        throw { status: 400, message: "User already registered!" };
 
       const year = roll.slice(0, 4);
       const batch = roll.slice(4, 7);
-      const number = parseInt(roll.slice(8));
+      const number = batch === "BCS" ? roll.slice(9) : roll.slice(8);
       const otp = generateOtp().toString();
 
       if (user) {

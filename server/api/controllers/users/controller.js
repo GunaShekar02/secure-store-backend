@@ -19,6 +19,18 @@ export class Controller {
       next(err);
     }
   }
+
+  async fetchResults(req, res, next) {
+    try {
+      const result = await UsersService.fetchResults(
+        req.body.roll,
+        req.body.sem
+      );
+      res.status(200).json({ result, message: "Successful" });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new Controller();

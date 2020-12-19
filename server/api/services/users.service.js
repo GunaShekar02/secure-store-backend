@@ -73,6 +73,20 @@ class UsersService {
       throw err;
     }
   }
+
+  /**
+   * Fetch results of a semester for a particular user
+   * @param {string} roll - Roll number of the user
+   * @param {number} sem - Sem number
+   */
+  async fetchResults(roll, sem) {
+    try {
+      const user = await userModel.findById(roll, "grades");
+      return user.grades[sem - 1];
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 export default new UsersService();

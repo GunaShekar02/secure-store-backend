@@ -49,8 +49,8 @@ class AdminService {
           .toString();
 
         const update = {};
-        update[`grades.${sem}`] = encryptedResult;
-        update[`hashes.${sem}`] = keccak256(JSON.stringify(grade)).toString(
+        update[`grades.${sem - 1}`] = encryptedResult;
+        update[`hashes.${sem - 1}`] = keccak256(JSON.stringify(grade)).toString(
           "hex"
         );
 
